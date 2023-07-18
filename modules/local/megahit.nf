@@ -7,13 +7,13 @@ process MEGAHIT {
         'quay.io/biocontainers/megahit:1.2.9--h43eeafb_4' }"
 
     input:
-    tuple val(sample_id), path(reads)
+    tuple val(meta), path(reads)
 
     output:
-    tuple val(sample_id), path("${sample_id}-contigs.fasta"), emit: contigs
+    tuple val(meta), path("${meta.id}-contigs.fasta"), emit: contigs
 
     script:
     """
-    megahit -t $task.cpus -1 ${reads[0]} -2 ${reads[1]} -o megahit_out && cp megahit_out/final.contigs.fa ${sample_id}-contigs.fasta
+    megahit -t $task.cpus -1 ${reads[0]} -2 ${reads[1]} -o megahit_out && cp megahit_out/final.contigs.fa ${meta.id}-contigs.fasta
     """
 }

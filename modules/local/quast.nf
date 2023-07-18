@@ -7,13 +7,13 @@ process QUAST {
         'quay.io/biocontainers/quast:5.2.0--py310pl5321h6cc9453_3' }"
 
     input:
-    tuple val(sample_id), path(contigs)
+    tuple val(meta), path(contigs)
 
     output:
-    path("${sample_id}-quast_results"), emit: quast_results
+    path("${meta.id}-quast_results"), emit: quast_results
 
     script:
     """
-    quast -t $task.cpus $contigs && mv quast_results ${sample_id}-quast_results
+    quast -t $task.cpus $contigs && mv quast_results ${meta.id}-quast_results
     """
 }
