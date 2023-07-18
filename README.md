@@ -8,6 +8,8 @@ nf-core create --name assemblyexample --description "Example assembly pipeline" 
 
 The following steps proceed through the process of adapting this template to execute the pipeline defined in <https://github.com/apetkau/assembly-nf/>.
 
+The readme file created by `nf-core create` is [README.md.ORIG](README.md.ORIG).
+
 # 1. Running initial template pipeline
 
 ```bash
