@@ -1,6 +1,12 @@
-# Example nf-core template
+# Example nf-core
 
-This is an example nf-core template created initially using the command:
+This repository shows off some basic steps for creating a pipeline in Nextflow/nf-core. This is supplementary material for a presentation, which are listed below:
+
+* Presentation [Petkau-Nextflow-2023-07-18.pdf](docs/Petkau-Nextflow-2023-07-18.pdf)
+* Basic Nextflow pipeline: <https://github.com/apetkau/assembly-nf>
+* Nf-core pipeline (this repository): <https://github.com/apetkau/nf-core-assemblyexample>
+
+The files in this repository are part of the default nf-core template created initially using the command:
 
 ```bash
 nf-core create --name assemblyexample --description "Example assembly pipeline" --plain --author "Aaron Petkau"
@@ -27,16 +33,18 @@ git checkout step1
 cd example-execution
 
 # Run pipeline
-nextflow run ../ --input samplesheet.csv --outdir results -profile singularity --genome hg38
+nextflow run ../ --input samplesheet.csv --outdir results -profile singularity --genome hg38 --max_memory 8.GB --max_cpus 4
 ```
+
+You can ignore `--max_memory` and `--max_cpus` if you wish to use the defaults (defined in `nextflow.config`). However, you may need to adjust these values depending on which machine you run the pipeline on.
 
 # Step 2. Adding processess
 
 To add additional processess to the workflow, we will first start with the three processess (FASTP, MEGAHIT, QUAST) from <https://github.com/apetkau/assembly-nf/blob/main/main.nf>. These will be broken up into separate files and added to `modules/local/`. That is, we will add the following files:
 
-* [modules/local/fastp.nf](modules/local/fastp.nf)
-* [modules/local/megahit.nf](modules/local/megahit.nf)
-* [modules/local/quast.nf](modules/local/quast.nf)
+* [modules/local/fastp.nf](https://github.com/apetkau/nf-core-assemblyexample/blob/step2/modules/local/fastp.nf)
+* [modules/local/megahit.nf](https://github.com/apetkau/nf-core-assemblyexample/blob/step2/modules/local/megahit.nf)
+* [modules/local/quast.nf](https://github.com/apetkau/nf-core-assemblyexample/blob/step2/modules/local/quast.nf)
 
 We will have to modify these files to replace any `val(sample_id)` with `val(meta)` and `${sample_id}` with `${meta.id}` due to the way nf-core structures data within a channel (for nf-core, `meta.id` is the sample identifier associated with fastq files).
 
