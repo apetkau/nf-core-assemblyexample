@@ -77,18 +77,9 @@ include { FASTP                       } from '../modules/nf-core/fastp/main'
 
 Next, modify the execution of each imported process if there were different parameters or input/output files.
 
-## 3.3. Make adjustments to configuration
+## 3.3. Make adjustments to max memory
 
-You can make adjustments to the configuration of individual processess in the `conf/modules.config` file. For example, I had to add the following section to reduce the default memory usage of MEGAHIT:
-
-*In [conf/modules.config][conf/modules.config]*
-
-```
-// Reducing memory assigned to megahit
-withName:MEGAHIT {
-    memory = { 32.GB * task.attempt }
-}
-```
+You can make adjustments to many of the parameters of the pipeline in [nextflow.config](nextflow.config). In particular, we will have to reduce the default maximum memory by setting `max_memory = 32.GB` in this file. This is to prevent megahit from taking too much memory by default.
 
 ## 3.4. Remove existing modules
 
