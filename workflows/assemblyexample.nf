@@ -47,9 +47,9 @@ include { INPUT_CHECK } from '../subworkflows/local/input_check'
 // MODULE: Installed directly from nf-core/modules
 //
 include { FASTQC                      } from '../modules/nf-core/fastqc/main'
-include { FASTP                       } from '../modules/local/fastp'
-include { MEGAHIT                     } from '../modules/local/megahit'
-include { QUAST                       } from '../modules/local/quast'
+include { FASTP                       } from '../modules/nf-core/fastp/main'
+include { MEGAHIT                     } from '../modules/nf-core/megahit/main'
+include { QUAST                       } from '../modules/nf-core/quast/main'
 include { MULTIQC                     } from '../modules/nf-core/multiqc/main'
 include { CUSTOM_DUMPSOFTWAREVERSIONS } from '../modules/nf-core/custom/dumpsoftwareversions/main'
 
@@ -87,15 +87,22 @@ workflow ASSEMBLYEXAMPLE {
 
     // Adding assembly workflow steps here
     FASTP (
-        INPUT_CHECK.out.reads
+        INPUT_CHECK.out.reads,
+        adapter_fasta=[],
+        save_trimmed_fail=false,
+        save_merged=false
     )
 
     MEGAHIT (
-       FASTP.out.reads
+        FASTP.out.reads
     )
 
     QUAST (
-        MEGAHIT.out.contigs
+        consensus=MEGAHIT.out.contigs,
+        fasta=Channel.empty(),
+        gff=Channel.empty(),
+        use_fasta=false,
+        use_gff=false
     )
 
     CUSTOM_DUMPSOFTWAREVERSIONS (
