@@ -47,6 +47,9 @@ include { INPUT_CHECK } from '../subworkflows/local/input_check'
 // MODULE: Installed directly from nf-core/modules
 //
 include { FASTQC                      } from '../modules/nf-core/fastqc/main'
+include { FASTP                       } from '../modules/local/fastp'
+include { MEGAHIT                     } from '../modules/local/megahit'
+include { QUAST                       } from '../modules/local/quast'
 include { MULTIQC                     } from '../modules/nf-core/multiqc/main'
 include { CUSTOM_DUMPSOFTWAREVERSIONS } from '../modules/nf-core/custom/dumpsoftwareversions/main'
 
@@ -81,6 +84,19 @@ workflow ASSEMBLYEXAMPLE {
         INPUT_CHECK.out.reads
     )
     ch_versions = ch_versions.mix(FASTQC.out.versions.first())
+
+    // Adding assembly workflow steps here
+    FASTP (
+        INPUT_CHECK.out.reads
+    )
+
+    MEGAHIT (
+       FASTP.out.reads
+    )
+
+    QUAST (
+        MEGAHIT.out.contigs
+    )
 
     CUSTOM_DUMPSOFTWAREVERSIONS (
         ch_versions.unique().collectFile(name: 'collated_versions.yml')
