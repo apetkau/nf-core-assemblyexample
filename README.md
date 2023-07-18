@@ -2,7 +2,7 @@
 
 This repository shows off some basic steps for creating a pipeline in Nextflow/nf-core. This is supplementary material for a presentation, which are listed below:
 
-* Presentation [Petkau-Nextflow-2023-07-18.pdf](docs/Petkau-Nextflow-2023-07-18.pdf)
+* Presentation [PetkauNextflow-2023-07-18.pdf](docs/PetkauNextflow-2023-07-18.pdf)
 * Basic Nextflow pipeline: <https://github.com/apetkau/assembly-nf>
 * Nf-core pipeline (this repository): <https://github.com/apetkau/nf-core-assemblyexample>
 
