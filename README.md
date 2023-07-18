@@ -10,6 +10,15 @@ The following steps proceed through the process of adapting this template to exe
 
 The readme file created by `nf-core create` is [README.md.ORIG](README.md.ORIG).
 
+# 0. Setup
+
+Prior to proceeding through this information, please make sure that `nextflow` and `nf-core` is installed. This can be installed with conda using:
+
+```bash
+conda create --name nextflow nextflow nf-core
+conda activate nextflow
+```
+
 # 1. Running initial template pipeline
 
 ```bash
