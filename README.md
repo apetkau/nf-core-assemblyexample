@@ -96,3 +96,12 @@ nextflow run ../ --input samplesheet.csv --outdir results -profile singularity -
 
 To view a summary of all changes, please see <https://github.com/apetkau/nf-core-assemblyexample/compare/step2...step3>.
 
+# Step 4. Adjusting parameters
+
+Parameters can be adjusted in the [nextflow.config](nextflow.config) file. These can be set to defaults, or new parameters added/others removed.
+
+To get rid of the need to use `--genome hg38`, an easy way is to set `genome = 'hg38'` as a default genome parameter.
+
+However, to get rid of the parameter entirely, you can delete it from `nextflow.config` and comment-out the following lines <https://github.com/apetkau/nf-core-assemblyexample/blob/7a69b8c006610d3d07ad212c71bd807e63dde340/lib/WorkflowAssemblyexample.groovy#L18-L20>.
+
+For this step, I have chosen to set "hg38" as the default, even if it's not used. To view a summary of changes, please see <https://github.com/apetkau/nf-core-assemblyexample/compare/step3...step4>.
