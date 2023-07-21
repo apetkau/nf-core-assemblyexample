@@ -6,6 +6,8 @@ This repository shows off some basic steps for creating a pipeline in Nextflow/n
 * Basic Nextflow pipeline: <https://github.com/apetkau/assembly-nf>
 * Nf-core pipeline (this repository): <https://github.com/apetkau/nf-core-assemblyexample>
 
+Additional information about creating a pipeline can also be found in the nf-core documentation: <https://nf-co.re/docs/contributing/adding_pipelines>.
+
 The files in this repository are part of the default nf-core template created initially using the command:
 
 ```bash
