@@ -36,7 +36,7 @@ cd example-execution
 nextflow run ../ --input samplesheet.csv --outdir results -profile singularity --genome hg38 --max_memory 8.GB --max_cpus 4
 ```
 
-You can ignore `--max_memory` and `--max_cpus` if you wish to use the defaults (defined in `nextflow.config`). However, you may need to adjust these values depending on which machine you run the pipeline on.
+You can ignore `--max_memory` and `--max_cpus` if you wish to use the defaults (defined in `nextflow.config`). However, you may need to adjust these values depending on which machine you run the pipeline on. These act to set a cap on the maximum resources used by each process (see <https://nf-co.re/docs/usage/configuration#max-resources>).
 
 # Step 2. Adding processess
 
@@ -87,7 +87,7 @@ Next, modify the execution of each imported process if there were different para
 
 ## 3.3. Make adjustments to max memory
 
-You can make adjustments to many of the parameters of the pipeline in [nextflow.config](nextflow.config). In particular, we will have to reduce the default maximum memory by setting `max_memory = 32.GB` in this file. This is to prevent megahit from taking too much memory by default.
+You can make adjustments to many of the parameters of the pipeline in [nextflow.config](nextflow.config). These can be overridden by command-line arguments (such as `--max_memory` as described above), but it may be useful to adjust the default values here. In particular, the `megahit` tool is set to use a very large amount of memory by default. You can decrease the default maximum memory by setting `max_memory = 8.GB` in this file (adjusting the value for your particular use case).
 
 ## 3.4. Remove existing modules
 
