@@ -115,3 +115,84 @@ To get rid of the need to use `--genome hg38`, an easy way is to set `genome = '
 However, to get rid of the parameter entirely, you can delete it from `nextflow.config` and comment-out the following lines <https://github.com/apetkau/nf-core-assemblyexample/blob/7a69b8c006610d3d07ad212c71bd807e63dde340/lib/WorkflowAssemblyexample.groovy#L18-L20>.
 
 For this step, I have chosen to set "hg38" as the default, even if it's not used. To view a summary of changes, please see <https://github.com/apetkau/nf-core-assemblyexample/compare/step3...step4>.
+
+# Step 5. Tests and linting
+
+## 5.1. Linting
+
+nf-core provides the capability to run a linter to check for any possible issues using the command `nf-core lint`. Running this now gives:
+
+**Command**
+```bash
+nf-core lint
+```
+
+**Output**
+```
+...
+│ pipeline_todos: TOD string in nextflow.config: Specify your pipeline's command line flags                                                                       │
+│ pipeline_todos: TODO string in test_full.config: Specify the paths to your full test data ( on nf-core/test-datasets or directly in repositories, e.g. SRA)      │
+│ pipeline_todos: TODO string in test_full.config: Give any required params for the test so that command line flags are not needed
+...
+
+╭───────────────────────╮
+│ LINT RESULTS SUMMARY  │
+├───────────────────────┤
+│ [✔] 193 Tests Passed  │
+│ [?]   0 Tests Ignored │
+│ [!]  25 Test Warnings │
+│ [✗]   0 Tests Failed  │
+╰───────────────────────╯
+```
+
+That is, there are no issues with this pipeline, though there are a number of warnings, which all have to do with addressing **TODO** statements. We will focus on addressing the Testing **TODO**s.
+
+## 5.2. Testing
+
+nf-core also provides profiles that are intended to be used to run the pipeline with test data. To do this, we can run the below command:
+
+**Command**
+```bash
+nextflow run . -profile docker,test --outdir results
+```
+
+**Output**
+```
+executor >  local (15)
+[7f/08ba89] process > NFCORE_ASSEMBLYEXAMPLE:ASSEMBLYEXAMPLE:INPUT_CHECK:SAMPLESHEET_CHECK (samplesheet_test_illumina_amplicon.csv) [100%] 1 of 1 ✔
+[3c/da189b] process > NFCORE_ASSEMBLYEXAMPLE:ASSEMBLYEXAMPLE:FASTQC (SAMPLE1_PE_T1)                                                 [100%] 4 of 4 ✔
+[c2/3aea54] process > NFCORE_ASSEMBLYEXAMPLE:ASSEMBLYEXAMPLE:FASTP (SAMPLE1_PE_T1)                                                  [100%] 4 of 4 ✔
+[0b/4a2548] process > NFCORE_ASSEMBLYEXAMPLE:ASSEMBLYEXAMPLE:MEGAHIT (SAMPLE1_PE_T1)                                                [100%] 4 of 4 ✔
+[-        ] process > NFCORE_ASSEMBLYEXAMPLE:ASSEMBLYEXAMPLE:QUAST                                                                  -
+[47/11da11] process > NFCORE_ASSEMBLYEXAMPLE:ASSEMBLYEXAMPLE:CUSTOM_DUMPSOFTWAREVERSIONS (1)                                        [100%] 1 of 1 ✔
+[21/266316] process > NFCORE_ASSEMBLYEXAMPLE:ASSEMBLYEXAMPLE:MULTIQC                                                                [100%] 1 of 1 ✔
+-[nf-core/assemblyexample] Pipeline completed successfully-
+Completed at: 15-Aug-2023 15:54:16
+Duration    : 1m 47s
+CPU hours   : 0.1
+Succeeded   : 15
+```
+
+This runs the pipeline with a minimal dataset and configured parameters as defined in <https://github.com/apetkau/nf-core-assemblyexample/blob/main/conf/test.config>.
+
+```
+params {
+    config_profile_name        = 'Test profile'
+    config_profile_description = 'Minimal test dataset to check pipeline function'
+
+    // Limit resources so that this can run on GitHub Actions
+    max_cpus   = 2
+    max_memory = '6.GB'
+    max_time   = '6.h'
+
+    // Input data
+    // TODO nf-core: Specify the paths to your test data on nf-core/test-datasets
+    // TODO nf-core: Give any required params for the test so that command line flags are not needed
+    input  = 'https://raw.githubusercontent.com/nf-core/test-datasets/viralrecon/samplesheet/samplesheet_test_illumina_amplicon.csv'
+
+    // Genome references
+    genome = 'R64-1-1'
+}
+```
+
+You may need to update this if the pipeline tests fail to run.
