@@ -1,106 +1,117 @@
-# ![nf-core/assemblyexample](docs/images/nf-core-assemblyexample_logo_light.png#gh-light-mode-only) ![nf-core/assemblyexample](docs/images/nf-core-assemblyexample_logo_dark.png#gh-dark-mode-only)
+# Example nf-core
 
-[![AWS CI](https://img.shields.io/badge/CI%20tests-full%20size-FF9900?labelColor=000000&logo=Amazon%20AWS)](https://nf-co.re/assemblyexample/results)[![Cite with Zenodo](http://img.shields.io/badge/DOI-10.5281/zenodo.XXXXXXX-1073c8?labelColor=000000)](https://doi.org/10.5281/zenodo.XXXXXXX)
+This repository shows off some basic steps for creating a pipeline in Nextflow/nf-core. This is supplementary material for a presentation, which are listed below:
 
-[![Nextflow](https://img.shields.io/badge/nextflow%20DSL2-%E2%89%A523.04.0-23aa62.svg)](https://www.nextflow.io/)
-[![run with conda](http://img.shields.io/badge/run%20with-conda-3EB049?labelColor=000000&logo=anaconda)](https://docs.conda.io/en/latest/)
-[![run with docker](https://img.shields.io/badge/run%20with-docker-0db7ed?labelColor=000000&logo=docker)](https://www.docker.com/)
-[![run with singularity](https://img.shields.io/badge/run%20with-singularity-1d355c.svg?labelColor=000000)](https://sylabs.io/docs/)
-[![Launch on Nextflow Tower](https://img.shields.io/badge/Launch%20%F0%9F%9A%80-Nextflow%20Tower-%234256e7)](https://tower.nf/launch?pipeline=https://github.com/nf-core/assemblyexample)
+* Presentation [PetkauNextflow-2023-07-18.pdf](docs/PetkauNextflow-2023-07-18.pdf)
+* Basic Nextflow pipeline: <https://github.com/apetkau/assembly-nf>
+* Nf-core pipeline (this repository): <https://github.com/apetkau/nf-core-assemblyexample>
 
-[![Get help on Slack](http://img.shields.io/badge/slack-nf--core%20%23assemblyexample-4A154B?labelColor=000000&logo=slack)](https://nfcore.slack.com/channels/assemblyexample)[![Follow on Twitter](http://img.shields.io/badge/twitter-%40nf__core-1DA1F2?labelColor=000000&logo=twitter)](https://twitter.com/nf_core)[![Follow on Mastodon](https://img.shields.io/badge/mastodon-nf__core-6364ff?labelColor=FFFFFF&logo=mastodon)](https://mstdn.science/@nf_core)[![Watch on YouTube](http://img.shields.io/badge/youtube-nf--core-FF0000?labelColor=000000&logo=youtube)](https://www.youtube.com/c/nf-core)
+Additional information about creating a pipeline can also be found in the nf-core documentation: <https://nf-co.re/docs/contributing/adding_pipelines>.
 
-## Introduction
-
-**nf-core/assemblyexample** is a bioinformatics pipeline that ...
-
-<!-- TODO nf-core:
-   Complete this sentence with a 2-3 sentence summary of what types of data the pipeline ingests, a brief overview of the
-   major pipeline sections and the types of output it produces. You're giving an overview to someone new
-   to nf-core here, in 15-20 seconds. For an example, see https://github.com/nf-core/rnaseq/blob/master/README.md#introduction
--->
-
-<!-- TODO nf-core: Include a figure that guides the user through the major workflow steps. Many nf-core
-     workflows use the "tube map" design for that. See https://nf-co.re/docs/contributing/design_guidelines#examples for examples.   -->
-<!-- TODO nf-core: Fill in short bullet-pointed list of the default steps in the pipeline -->
-
-1. Read QC ([`FastQC`](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/))
-2. Present QC for raw reads ([`MultiQC`](http://multiqc.info/))
-
-## Usage
-
-> **Note**
-> If you are new to Nextflow and nf-core, please refer to [this page](https://nf-co.re/docs/usage/installation) on how
-> to set-up Nextflow. Make sure to [test your setup](https://nf-co.re/docs/usage/introduction#how-to-run-a-pipeline)
-> with `-profile test` before running the workflow on actual data.
-
-<!-- TODO nf-core: Describe the minimum required steps to execute the pipeline, e.g. how to prepare samplesheets.
-     Explain what rows and columns represent. For instance (please edit as appropriate):
-
-First, prepare a samplesheet with your input data that looks as follows:
-
-`samplesheet.csv`:
-
-```csv
-sample,fastq_1,fastq_2
-CONTROL_REP1,AEG588A1_S1_L002_R1_001.fastq.gz,AEG588A1_S1_L002_R2_001.fastq.gz
-```
-
-Each row represents a fastq file (single-end) or a pair of fastq files (paired end).
-
--->
-
-Now, you can run the pipeline using:
-
-<!-- TODO nf-core: update the following command to include all required parameters for a minimal example -->
+The files in this repository are part of the default nf-core template created initially using the command:
 
 ```bash
-nextflow run nf-core/assemblyexample \
-   -profile <docker/singularity/.../institute> \
-   --input samplesheet.csv \
-   --outdir <OUTDIR>
+nf-core create --name assemblyexample --description "Example assembly pipeline" --plain --author "Aaron Petkau"
 ```
 
-> **Warning:**
-> Please provide pipeline parameters via the CLI or Nextflow `-params-file` option. Custom config files including those
-> provided by the `-c` Nextflow option can be used to provide any configuration _**except for parameters**_;
-> see [docs](https://nf-co.re/usage/configuration#custom-configuration-files).
+The following steps proceed through the process of adapting this template to execute the pipeline defined in <https://github.com/apetkau/assembly-nf/>.
 
-For more details and further functionality, please refer to the [usage documentation](https://nf-co.re/assemblyexample/usage) and the [parameter documentation](https://nf-co.re/assemblyexample/parameters).
+The readme file created by `nf-core create` is [README.md.ORIG](README.md.ORIG).
 
-## Pipeline output
+# Setup
 
-To see the results of an example test run with a full size dataset refer to the [results](https://nf-co.re/assemblyexample/results) tab on the nf-core website pipeline page.
-For more details about the output files and reports, please refer to the
-[output documentation](https://nf-co.re/assemblyexample/output).
+Prior to proceeding through this information, please make sure that `nextflow` and `nf-core` is installed. This can be installed with conda using:
 
-## Credits
+```bash
+conda create --name nextflow nextflow nf-core
+conda activate nextflow
+```
 
-nf-core/assemblyexample was originally written by Aaron Petkau.
+# Step 1. Running initial template pipeline
 
-We thank the following people for their extensive assistance in the development of this pipeline:
+```bash
+# Checkout necessary files
+git checkout step1
+cd example-execution
 
-<!-- TODO nf-core: If applicable, make list of people who have also contributed -->
+# Run pipeline
+nextflow run ../ --input samplesheet.csv --outdir results -profile singularity --genome hg38 --max_memory 8.GB --max_cpus 4
+```
 
-## Contributions and Support
+You can ignore `--max_memory` and `--max_cpus` if you wish to use the defaults (defined in `nextflow.config`). However, you may need to adjust these values depending on which machine you run the pipeline on. These act to set a cap on the maximum resources used by each process (see <https://nf-co.re/docs/usage/configuration#max-resources>).
 
-If you would like to contribute to this pipeline, please see the [contributing guidelines](.github/CONTRIBUTING.md).
+# Step 2. Adding processess
 
-For further information or help, don't hesitate to get in touch on the [Slack `#assemblyexample` channel](https://nfcore.slack.com/channels/assemblyexample) (you can join with [this invite](https://nf-co.re/join/slack)).
+To add additional processess to the workflow, we will first start with the three processess (FASTP, MEGAHIT, QUAST) from <https://github.com/apetkau/assembly-nf/blob/main/main.nf>. These will be broken up into separate files and added to `modules/local/`. That is, we will add the following files:
 
-## Citations
+* [modules/local/fastp.nf](https://github.com/apetkau/nf-core-assemblyexample/blob/step2/modules/local/fastp.nf)
+* [modules/local/megahit.nf](https://github.com/apetkau/nf-core-assemblyexample/blob/step2/modules/local/megahit.nf)
+* [modules/local/quast.nf](https://github.com/apetkau/nf-core-assemblyexample/blob/step2/modules/local/quast.nf)
 
-<!-- TODO nf-core: Add citation for pipeline after first release. Uncomment lines below and update Zenodo doi and badge at the top of this file. -->
-<!-- If you use  nf-core/assemblyexample for your analysis, please cite it using the following doi: [10.5281/zenodo.XXXXXX](https://doi.org/10.5281/zenodo.XXXXXX) -->
+We will have to modify these files to replace any `val(sample_id)` with `val(meta)` and `${sample_id}` with `${meta.id}` due to the way nf-core structures data within a channel (for nf-core, `meta.id` is the sample identifier associated with fastq files).
 
-<!-- TODO nf-core: Add bibliography of tools and data used in your pipeline -->
+Next, we modify the file `workflows/assemblyexample.nf` to import the above modules and add the steps to the workflow.
 
-An extensive list of references for the tools used by the pipeline can be found in the [`CITATIONS.md`](CITATIONS.md) file.
+You can now run the updated workflow with the same run command:
 
-You can cite the `nf-core` publication as follows:
+```bash
+cd example-execution
+nextflow run ../ --input samplesheet.csv --outdir results -profile singularity --genome hg38
+```
 
-> **The nf-core framework for community-curated bioinformatics pipelines.**
->
-> Philip Ewels, Alexander Peltzer, Sven Fillinger, Harshil Patel, Johannes Alneberg, Andreas Wilm, Maxime Ulysse Garcia, Paolo Di Tommaso & Sven Nahnsen.
->
-> _Nat Biotechnol._ 2020 Feb 13. doi: [10.1038/s41587-020-0439-x](https://dx.doi.org/10.1038/s41587-020-0439-x).
+To view a summary of all changes, please see <https://github.com/apetkau/nf-core-assemblyexample/compare/step1...step2>.
+
+# Step 3. Switching to nf-core modules
+
+Nf-core provides a large collection of modules that define processess for bioinformatics tools (fastp, megahit, quast). To switch to these community-maintained modules, you can do the following.
+
+## 3.1. Install nf-core modules
+
+To install the nf-core modules, make sure you are in the root of the nextflow pipeline directory (this directory <https://github.com/apetkau/nf-core-assemblyexample>) and run the following:
+
+```bash
+nf-core modules install fastp
+nf-core modules install megahit
+nf-core modules install quast
+```
+
+This will install the modules in `modules/nf-core` and create a file `modules.json` to track versions. You can commit these files to git.
+
+## 3.2. Add modules to workflow
+
+To add modules to the workflow (`workflows/assemblyexample.nf`), for each module add the following line to import the module:
+
+```
+include { FASTP                       } from '../modules/nf-core/fastp/main'
+```
+
+Next, modify the execution of each imported process if there were different parameters or input/output files.
+
+## 3.3. Make adjustments to max memory
+
+You can make adjustments to many of the parameters of the pipeline in [nextflow.config](nextflow.config). These can be overridden by command-line arguments (such as `--max_memory` as described above), but it may be useful to adjust the default values here. In particular, the `megahit` tool is set to use a very large amount of memory by default. You can decrease the default maximum memory by setting `max_memory = 8.GB` in this file (adjusting the value for your particular use case).
+
+## 3.4. Remove existing modules
+
+You can now remove the previously created `modules/local/{fastp,megahit,quast}.nf` files, as they are no longer needed.
+
+## 3.5. Execute pipeline
+
+You should now be able to execute the pipeline:
+
+```bash
+cd example-execution
+nextflow run ../ --input samplesheet.csv --outdir results -profile singularity --genome hg38
+```
+
+To view a summary of all changes, please see <https://github.com/apetkau/nf-core-assemblyexample/compare/step2...step3>.
+
+# Step 4. Adjusting parameters
+
+Parameters can be adjusted in the [nextflow.config](nextflow.config) file. These can be set to defaults, or new parameters added/others removed.
+
+To get rid of the need to use `--genome hg38`, an easy way is to set `genome = 'hg38'` as a default genome parameter.
+
+However, to get rid of the parameter entirely, you can delete it from `nextflow.config` and comment-out the following lines <https://github.com/apetkau/nf-core-assemblyexample/blob/7a69b8c006610d3d07ad212c71bd807e63dde340/lib/WorkflowAssemblyexample.groovy#L18-L20>.
+
+For this step, I have chosen to set "hg38" as the default, even if it's not used. To view a summary of changes, please see <https://github.com/apetkau/nf-core-assemblyexample/compare/step3...step4>.

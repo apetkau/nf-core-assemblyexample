@@ -1,0 +1,4 @@
+sample,fastq_1,fastq_2
+08-5578-small,example-data/reads/08-5578-small_1.fastq.gz,example-data/reads/08-5578-small_2.fastq.gz
+08-5923-small,example-data/reads/08-5923-small_1.fastq.gz,example-data/reads/08-5923-small_2.fastq.gz
+hcc23-small,example-data/reads/hcc23-small_1.fastq.gz,example-data/reads/hcc23-small_2.fastq.gz
