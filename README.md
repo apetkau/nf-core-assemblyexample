@@ -120,7 +120,7 @@ For this step, I have chosen to set "hg38" as the default, even if it's not used
 
 ## 5.1. Linting
 
-nf-core provides the capability to run a linter to check for any possible issues using the command `nf-core lint`. Running this now gives:
+nf-core provides the capability to run a linter to check for any possible issues using the command `nf-core lint` (see the [nf-core linting documentation](https://nf-co.re/tools#linting-a-workflow) for more details). Running this now gives:
 
 **Command**
 ```bash
@@ -149,7 +149,7 @@ That is, there are no issues with this pipeline, though there are a number of wa
 
 ## 5.2. Testing
 
-nf-core also provides profiles that are intended to be used to run the pipeline with test data. To do this, we can run the below command:
+nf-core also provides profiles that are intended to be used to run the pipeline with test data (see the [nf-core pipeline testing tutorial](https://nf-co.re/docs/contributing/tutorials/creating_with_nf_core#testing-the-new-pipeline) for details). To do this, we can run the below command:
 
 **Command**
 ```bash
@@ -173,7 +173,7 @@ CPU hours   : 0.1
 Succeeded   : 15
 ```
 
-This runs the pipeline with a minimal dataset and configured parameters as defined in <https://github.com/apetkau/nf-core-assemblyexample/blob/main/conf/test.config>.
+This runs the pipeline with a minimal dataset and configured parameters as defined in <https://github.com/apetkau/nf-core-assemblyexample/blob/step5/conf/test.config>.
 
 ```
 params {
@@ -196,3 +196,32 @@ params {
 ```
 
 You may need to update this if the pipeline tests fail to run.
+
+There are two types of testing profiles: (1) [test](https://github.com/apetkau/nf-core-assemblyexample/blob/step5/conf/test.config) (for small-scale testing) and (2) [test_full](https://github.com/apetkau/nf-core-assemblyexample/blob/step5/conf/test_full.config) (for full-sized dataset testing).
+
+Let's try to run `test_full`.
+
+**Command**
+```bash
+nextflow run . -profile docker,test_full --outdir results
+```
+
+**Output**
+```
+[11/56325e] process > NFCORE_ASSEMBLYEXAMPLE:ASSEMBLYEXAMPLE:INPUT_CHECK:SAMPLESHEET_CHECK (samplesheet_full_illumina_amplicon.csv) [100%] 1 of 1 ✔
+[b5/a1ea7d] process > NFCORE_ASSEMBLYEXAMPLE:ASSEMBLYEXAMPLE:FASTQC (sample2_T1)                                                    [100%] 2 of 2 ✔
+[3a/57842f] process > NFCORE_ASSEMBLYEXAMPLE:ASSEMBLYEXAMPLE:FASTP (sample2_T1)                                                     [100%] 2 of 2 ✔
+[fd/af2df1] process > NFCORE_ASSEMBLYEXAMPLE:ASSEMBLYEXAMPLE:MEGAHIT (sample2_T1)                                                   [100%] 2 of 2 ✔
+[-        ] process > NFCORE_ASSEMBLYEXAMPLE:ASSEMBLYEXAMPLE:QUAST                                                                  -
+[9b/b078b7] process > NFCORE_ASSEMBLYEXAMPLE:ASSEMBLYEXAMPLE:CUSTOM_DUMPSOFTWAREVERSIONS (1)                                        [100%] 1 of 1 ✔
+[be/20ded5] process > NFCORE_ASSEMBLYEXAMPLE:ASSEMBLYEXAMPLE:MULTIQC                                                                [100%] 1 of 1 ✔
+-[nf-core/assemblyexample] Pipeline completed successfully-
+Completed at: 15-Aug-2023 16:19:25
+Duration    : 16m 46s
+CPU hours   : 1.0
+Succeeded   : 9
+```
+
+This succeeded as well, but was on larger files (compare running time of ~2 min for `test` to ~17 min for `test_full`.
+
+As both linting and test profiles succeeded, there is no code modifications needed for this step. 
