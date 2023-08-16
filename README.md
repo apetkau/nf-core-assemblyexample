@@ -325,7 +325,11 @@ In some locations of GitHub Actions configuration files, the branch `master` is 
 
 - [.github/ci/branch.yml](https://github.com/apetkau/nf-core-assemblyexample/blob/step5/.github/workflows/branch.yml#L6): This action makes sure PRs are only submitted to `dev`. We can change `master` to `main` in this file so that it will be properly triggered.
 
-All these changes can be viewed in the following commit: <>.
+All these changes can be viewed in the following commit: <https://github.com/apetkau/nf-core-assemblyexample/commit/eeb0186126e7337256a99445984098f1a4e22e41>.
+
+## 6.4. Finish PR
+
+Finally, the necessary changes have been made. You can push to the branch `step/ci-tests` and verify the tests pass.
 
 The passing tests and code changes can all be reviewed in the [step 6 pull-request](https://github.com/apetkau/nf-core-assemblyexample/pull/3). You can also review the code changes needed at <https://github.com/apetkau/nf-core-assemblyexample/compare/step5...step6>.
 
