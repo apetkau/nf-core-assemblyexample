@@ -283,8 +283,11 @@ Now, you can commit any of the changed files and re-push to try the CI tests aga
 
 ![nf-core-ci-tests-pass.png][]
 
-## 6.2. Add pipeline execution integration tests
+These tests are divided up into two categories (see [nf-core testing docs](https://nf-co.re/docs/contributing/contributing_to_pipelines#testing) for details).
 
-In the previous list of GitHub actions tests, one of the test, **nf-core CI / Run pipeline with test data** was skipped. We will make the changes in order to get this test to work.
+- **Lint tests**: These tests verify that code confirms to nf-core specs and includes running `nf-core lint` as well as `prettier` (code formatting check) as well as **EditorConfig checker** and **Python Black** (other code formatting checks).
+- **Pipeline tests**: These tests run the pipeline by running the command `nextflow run . -profile test,docker --outdir ./results` (i.e., running the pipeline using the `test` profile and data configured in [Step 5](#step-5-tests-and-linting)).
+
+The passing tests and code changes can all be reviewed in the [step 6 pull-request](https://github.com/apetkau/nf-core-assemblyexample/pull/2). You can also review the code changes needed at <https://github.com/apetkau/nf-core-assemblyexample/compare/step5...step6>.
 
 [nf-core-ci-tests-pass.png]: docs/images/nf-core-ci-tests-pass.png
