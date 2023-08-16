@@ -224,6 +224,6 @@ Succeeded   : 9
 
 This succeeded as well, but was on larger files (compare running time of ~2 min for `test` to ~17 min for `test_full`.
 
-Since both the `test` and `test_full` profiles succeded with the defaults provided by nf-core, the only changes needed are to remove the **TODO** statements in the respective files: [test](https://github.com/apetkau/nf-core-assemblyexample/blob/step5/conf/test.config#L23-L24) and [test_full](https://github.com/apetkau/nf-core-assemblyexample/blob/step5/conf/test_full.config#L18-L19).
+Since both the `test` and `test_full` profiles succeded with the defaults provided by nf-core, the only changes needed are to remove the **TODO** statements in the respective files: [test](https://github.com/apetkau/nf-core-assemblyexample/blob/step4/conf/test.config#L23-L24) and [test_full](https://github.com/apetkau/nf-core-assemblyexample/blob/step4/conf/test_full.config#L18-L19).
 
 To view a summary of changes, please see <https://github.com/apetkau/nf-core-assemblyexample/compare/step4...step5>.
