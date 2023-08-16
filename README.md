@@ -250,7 +250,7 @@ git checkout -b step/ci-tests
 git push origin step/ci-tests
 ```
 
-In GitHub, we will create a [step 6 pull request](https://github.com/apetkau/nf-core-assemblyexample/pull/2) with these changes. This will trigger the existing configured GitHub Actions by nf-core.
+In GitHub, we will create a [step 6 pull request](https://github.com/apetkau/nf-core-assemblyexample/pull/3) with these changes. This will trigger the existing configured GitHub Actions by nf-core. This PR should be to the branch `dev`.
 
 ## 6.2. Fix existing tests
 
@@ -302,6 +302,6 @@ These tests are divided up into two categories (see [nf-core testing docs](https
 
 Configuration for the GitHub Actions workflows can be found in the [.github/workflows](https://github.com/apetkau/nf-core-assemblyexample/tree/step6/.github/workflows) directory.
 
-The passing tests and code changes can all be reviewed in the [step 6 pull-request](https://github.com/apetkau/nf-core-assemblyexample/pull/2). You can also review the code changes needed at <https://github.com/apetkau/nf-core-assemblyexample/compare/step5...step6>.
+The passing tests and code changes can all be reviewed in the [step 6 pull-request](https://github.com/apetkau/nf-core-assemblyexample/pull/3). You can also review the code changes needed at <https://github.com/apetkau/nf-core-assemblyexample/compare/step5...step6>.
 
 [nf-core-ci-tests-pass.png]: docs/images/nf-core-ci-tests-pass.png
