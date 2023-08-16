@@ -236,6 +236,8 @@ To view a summary of changes, please see <https://github.com/apetkau/nf-core-ass
 
 # Step 6: CI with GitHub Actions
 
+## 6.1. Fix existing tests
+
 On GitHub Actions CI tests for the current code, there is one faillure for the `nf-core linting / Prettier` check, mainly:
 
 ```
@@ -273,4 +275,14 @@ To make the necessary changes, the following can be run:
 prettier -w .
 ```
 
-Now, you can commit any of the changed files and re-push to try the CI tests again.
+Now, you can commit any of the changed files and re-push to try the CI tests again. All tests should pass.
+
+![nf-core-ci-tests-pass.png][]
+
+
+
+## 6.2. Add pipeline execution integration tests
+
+In the previous list of GitHub actions tests, one of the tests was skipped.
+
+[nf-core-ci-tests-pass.png]: docs/images/nf-core-ci-tests-pass.png
