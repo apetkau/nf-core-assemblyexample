@@ -59,7 +59,7 @@ cd example-execution
 nextflow run ../ --input samplesheet.csv --outdir results -profile singularity --genome hg38
 ```
 
-To view a summary of all changes, please see <https://github.com/apetkau/nf-core-assemblyexample/compare/step1...step2>.
+To view a summary of all changes, please see <https://github.com/apetkau/nf-core-assemblyexample/compare/step1...step2> (you can ignore changes in `README.md`).
 
 # Step 3. Switching to nf-core modules
 
@@ -104,7 +104,7 @@ cd example-execution
 nextflow run ../ --input samplesheet.csv --outdir results -profile singularity --genome hg38
 ```
 
-To view a summary of all changes, please see <https://github.com/apetkau/nf-core-assemblyexample/compare/step2...step3>.
+To view a summary of all changes, please see <https://github.com/apetkau/nf-core-assemblyexample/compare/step2...step3> (you can ignore changes in `README.md`).
 
 # Step 4. Adjusting parameters
 
@@ -114,7 +114,7 @@ To get rid of the need to use `--genome hg38`, an easy way is to set `genome = '
 
 However, to get rid of the parameter entirely, you can delete it from `nextflow.config` and comment-out the following lines <https://github.com/apetkau/nf-core-assemblyexample/blob/7a69b8c006610d3d07ad212c71bd807e63dde340/lib/WorkflowAssemblyexample.groovy#L18-L20>.
 
-For this step, I have chosen to set "hg38" as the default, even if it's not used. To view a summary of changes, please see <https://github.com/apetkau/nf-core-assemblyexample/compare/step3...step4>.
+For this step, I have chosen to set "hg38" as the default, even if it's not used. To view a summary of changes, please see <https://github.com/apetkau/nf-core-assemblyexample/compare/step3...step4> (you can ignore changes in `README.md`).
 
 # Step 5. Tests and linting
 
@@ -226,4 +226,4 @@ This succeeded as well, but was on larger files (compare running time of ~2 min 
 
 Since both the `test` and `test_full` profiles succeded with the defaults provided by nf-core, the only changes needed are to remove the **TODO** statements in the respective files: [test](https://github.com/apetkau/nf-core-assemblyexample/blob/step4/conf/test.config#L23-L24) and [test_full](https://github.com/apetkau/nf-core-assemblyexample/blob/step4/conf/test_full.config#L18-L19).
 
-To view a summary of changes, please see <https://github.com/apetkau/nf-core-assemblyexample/compare/step4...step5>.
+To view a summary of changes, please see <https://github.com/apetkau/nf-core-assemblyexample/compare/step4...step5> (you can ignore changes in `README.md`).
