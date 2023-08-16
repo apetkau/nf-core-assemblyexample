@@ -236,9 +236,13 @@ To view a summary of changes, please see <https://github.com/apetkau/nf-core-ass
 
 # Step 6: CI with GitHub Actions
 
+Continous Integration (CI) is the process of frequently commiting/merging code into a shared repository and automating the execution of tests to provide rapid feedback to catch any possible issues to new code (see <https://www.atlassian.com/continuous-delivery/continuous-integration>). [GitHub Actions](https://docs.github.com/en/actions) is one way to exectue continues integration suites that is provided by GitHub. nf-core has a comprehensive set of GitHub Actions workflows to run **linting** and **pipeline tests** on code (see [nf-core testing](https://nf-co.re/docs/contributing/contributing_to_pipelines#testing) for details).
+
+In this step, we will make the necessary changes in order to get the nf-core CI workflows configured on GitHub.
+
 ## 6.1. Fix existing tests
 
-On GitHub Actions CI tests for the current code, there is one faillure for the `nf-core linting / Prettier` check, mainly:
+On GitHub Actions CI tests for the current code, there is one faillure for the [`nf-core linting / Prettier` check](https://github.com/apetkau/nf-core-assemblyexample/actions/runs/5879510871), mainly:
 
 ```
 Run prettier --check ${GITHUB_WORKSPACE}
@@ -283,6 +287,6 @@ Now, you can commit any of the changed files and re-push to try the CI tests aga
 
 ## 6.2. Add pipeline execution integration tests
 
-In the previous list of GitHub actions tests, one of the tests was skipped.
+In the previous list of GitHub actions tests, one of the test, **nf-core CI / Run pipeline with test data** was skipped. We will make the changes in order to get this test to work.
 
 [nf-core-ci-tests-pass.png]: docs/images/nf-core-ci-tests-pass.png
