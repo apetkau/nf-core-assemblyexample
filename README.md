@@ -252,7 +252,7 @@ git push origin step/ci-tests
 
 In GitHub, we will create a [step 6 pull request](https://github.com/apetkau/nf-core-assemblyexample/pull/2) with these changes. This will trigger the existing configured GitHub Actions by nf-core.
 
-## 6.1. Fix existing tests
+## 6.2. Fix existing tests
 
 On GitHub Actions CI tests for the current code, there is one faillure for the [`nf-core linting / Prettier` check](https://github.com/apetkau/nf-core-assemblyexample/actions/runs/5879510871), mainly:
 
