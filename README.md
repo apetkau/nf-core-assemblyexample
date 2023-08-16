@@ -321,7 +321,7 @@ This **TODO** is related to [.github/workflows/ci.yml](https://github.com/apetka
 
 ### 6.3.3. All changes
 
-All these changes can be viewed in the following URL: <https://github.com/apetkau/nf-core-assemblyexample/compare/1f2ebe6a4289dae51b3496f1358cd210a5c255e7...>.
+All these changes can be viewed in the following URL: <https://github.com/apetkau/nf-core-assemblyexample/compare/1f2ebe6a4289dae51b3496f1358cd210a5c255e7...43c894209ba37e4d5755e6ea425fa0efa5ddbc80>.
 
 ## 6.4. Finish PR
 
