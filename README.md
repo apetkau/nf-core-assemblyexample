@@ -240,6 +240,18 @@ Continous Integration (CI) is the process of frequently commiting/merging code i
 
 In this step, we will make the necessary changes in order to get the nf-core CI workflows configured on GitHub.
 
+## 6.1. Create branch and pull-request
+
+The first step is to create a separate branch for these code changes and a pull-request. This can be done with:
+
+```bash
+git checkout -b step/ci-tests
+# Make changes to some files here and commit
+git push origin step/ci-tests
+```
+
+In GitHub, we will create a [step 6 pull request](https://github.com/apetkau/nf-core-assemblyexample/pull/2) with these changes. This will trigger the existing configured GitHub Actions by nf-core.
+
 ## 6.1. Fix existing tests
 
 On GitHub Actions CI tests for the current code, there is one faillure for the [`nf-core linting / Prettier` check](https://github.com/apetkau/nf-core-assemblyexample/actions/runs/5879510871), mainly:
