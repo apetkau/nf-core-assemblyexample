@@ -283,8 +283,6 @@ Now, you can commit any of the changed files and re-push to try the CI tests aga
 
 ![nf-core-ci-tests-pass.png][]
 
-
-
 ## 6.2. Add pipeline execution integration tests
 
 In the previous list of GitHub actions tests, one of the test, **nf-core CI / Run pipeline with test data** was skipped. We will make the changes in order to get this test to work.
