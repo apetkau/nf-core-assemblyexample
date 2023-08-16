@@ -302,6 +302,31 @@ These tests are divided up into two categories (see [nf-core testing docs](https
 
 Configuration for the GitHub Actions workflows can be found in the [.github/workflows](https://github.com/apetkau/nf-core-assemblyexample/tree/step6/.github/workflows) directory.
 
+## 6.3. Fix up CI-related TODOs/other small fixes
+
+We will also fix up and CI-related TODOs. These can be reviewed by running `nf-core lint`, which should show:
+
+```
+│ pipeline_todos: TODO string in awsfulltest.yml: You can customise AWS full pipeline tests as required                                                            │
+│ pipeline_todos: TODO string in ci.yml: You can customise CI pipeline run tests as required
+```
+
+### 6.3.1. AWS testing
+
+The first **TODO** relates to [.github/workflows/awsfulltest.yml](https://github.com/apetkau/nf-core-assemblyexample/blob/step5/.github/workflows/awsfulltest.yml#L18), which runs a test on the full dataset (the `test_full` profile) when the pipeline is released. We are not going to use AWS right now, so this TODO can be ignored.
+
+### 6.3.2. ci.yml customization
+
+This **TODO** is related to [.github/workflows/ci.yml](https://github.com/apetkau/nf-core-assemblyexample/blob/step5/.github/workflows/ci.yml#L39), and describes how the test command can be modified here. We can remove this **TODO** statement as we do not need to modify the command.
+
+### 6.3.3. Switch master to main
+
+In some locations of GitHub Actions configuration files, the branch `master` is used, when it should be `main`, and thus preventing the Action from running. We can make this change.
+
+- [.github/ci/branch.yml](https://github.com/apetkau/nf-core-assemblyexample/blob/step5/.github/workflows/branch.yml#L6): This action makes sure PRs are only submitted to `dev`. We can change `master` to `main` in this file so that it will be properly triggered.
+
+All these changes can be viewed in the following commit: <>.
+
 The passing tests and code changes can all be reviewed in the [step 6 pull-request](https://github.com/apetkau/nf-core-assemblyexample/pull/3). You can also review the code changes needed at <https://github.com/apetkau/nf-core-assemblyexample/compare/step5...step6>.
 
 [nf-core-ci-tests-pass.png]: docs/images/nf-core-ci-tests-pass.png
