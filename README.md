@@ -319,7 +319,11 @@ The first **TODO** relates to [.github/workflows/awsfulltest.yml](https://github
 
 This **TODO** is related to [.github/workflows/ci.yml](https://github.com/apetkau/nf-core-assemblyexample/blob/step5/.github/workflows/ci.yml#L39), and describes how the test command can be modified here. We can remove this **TODO** statement as we do not need to modify the command.
 
-### 6.3.3. All changes
+### 6.3.3. Automatic comments on PR
+
+The [.github/workflows/lint_comment.yml](https://github.com/apetkau/nf-core-assemblyexample/blob/step5/.github/workflows/lint_comment.yml) GitHub Actions workflow will add comments following linting of a PR on any detected issues. In order for this to work properly, you will need to go to **Settings > Actions > General > Workflow permissions** in the GitHub repository, and make sure to enable read and write permissions (as described here <https://github.com/marocchino/sticky-pull-request-comment>).
+
+### 6.3.4. All changes
 
 All these changes can be viewed in the following URL: <https://github.com/apetkau/nf-core-assemblyexample/compare/1f2ebe6a4289dae51b3496f1358cd210a5c255e7...43c894209ba37e4d5755e6ea425fa0efa5ddbc80>.
 
