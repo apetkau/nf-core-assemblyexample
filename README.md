@@ -319,13 +319,9 @@ The first **TODO** relates to [.github/workflows/awsfulltest.yml](https://github
 
 This **TODO** is related to [.github/workflows/ci.yml](https://github.com/apetkau/nf-core-assemblyexample/blob/step5/.github/workflows/ci.yml#L39), and describes how the test command can be modified here. We can remove this **TODO** statement as we do not need to modify the command.
 
-### 6.3.3. Switch master to main
+### 6.3.3. All changes
 
-In some locations of GitHub Actions configuration files, the branch `master` is used, when it should be `main`, and thus preventing the Action from running. We can make this change.
-
-- [.github/ci/branch.yml](https://github.com/apetkau/nf-core-assemblyexample/blob/step5/.github/workflows/branch.yml#L6): This action makes sure PRs are only submitted to `dev`. We can change `master` to `main` in this file so that it will be properly triggered.
-
-All these changes can be viewed in the following commit: <https://github.com/apetkau/nf-core-assemblyexample/commit/eeb0186126e7337256a99445984098f1a4e22e41>.
+All these changes can be viewed in the following URL: <https://github.com/apetkau/nf-core-assemblyexample/compare/1f2ebe6a4289dae51b3496f1358cd210a5c255e7...>.
 
 ## 6.4. Finish PR
 
