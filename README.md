@@ -2,9 +2,9 @@
 
 This repository shows off some basic steps for creating a pipeline in Nextflow/nf-core. This is supplementary material for a presentation, which are listed below:
 
-* Presentation [PetkauNextflow-2023-07-18.pdf](docs/PetkauNextflow-2023-07-18.pdf)
-* Basic Nextflow pipeline: <https://github.com/apetkau/assembly-nf>
-* Nf-core pipeline (this repository): <https://github.com/apetkau/nf-core-assemblyexample>
+- Presentation [PetkauNextflow-2023-07-18.pdf](docs/PetkauNextflow-2023-07-18.pdf)
+- Basic Nextflow pipeline: <https://github.com/apetkau/assembly-nf>
+- Nf-core pipeline (this repository): <https://github.com/apetkau/nf-core-assemblyexample>
 
 Additional information about creating a pipeline can also be found in the nf-core documentation: <https://nf-co.re/docs/contributing/adding_pipelines>.
 
@@ -44,9 +44,9 @@ You can ignore `--max_memory` and `--max_cpus` if you wish to use the defaults (
 
 To add additional processess to the workflow, we will first start with the three processess (FASTP, MEGAHIT, QUAST) from <https://github.com/apetkau/assembly-nf/blob/main/main.nf>. These will be broken up into separate files and added to `modules/local/`. That is, we will add the following files:
 
-* [modules/local/fastp.nf](https://github.com/apetkau/nf-core-assemblyexample/blob/step2/modules/local/fastp.nf)
-* [modules/local/megahit.nf](https://github.com/apetkau/nf-core-assemblyexample/blob/step2/modules/local/megahit.nf)
-* [modules/local/quast.nf](https://github.com/apetkau/nf-core-assemblyexample/blob/step2/modules/local/quast.nf)
+- [modules/local/fastp.nf](https://github.com/apetkau/nf-core-assemblyexample/blob/step2/modules/local/fastp.nf)
+- [modules/local/megahit.nf](https://github.com/apetkau/nf-core-assemblyexample/blob/step2/modules/local/megahit.nf)
+- [modules/local/quast.nf](https://github.com/apetkau/nf-core-assemblyexample/blob/step2/modules/local/quast.nf)
 
 We will have to modify these files to replace any `val(sample_id)` with `val(meta)` and `${sample_id}` with `${meta.id}` due to the way nf-core structures data within a channel (for nf-core, `meta.id` is the sample identifier associated with fastq files).
 
@@ -123,11 +123,13 @@ For this step, I have chosen to set "hg38" as the default, even if it's not used
 nf-core provides the capability to run a linter to check for any possible issues using the command `nf-core lint` (see the [nf-core linting documentation](https://nf-co.re/tools#linting-a-workflow) for more details). Running this now gives:
 
 **Command**
+
 ```bash
 nf-core lint
 ```
 
 **Output**
+
 ```
 ...
 │ pipeline_todos: TOD string in nextflow.config: Specify your pipeline's command line flags                                                                       │
@@ -152,11 +154,13 @@ That is, there are no issues with this pipeline, though there are a number of wa
 nf-core also provides profiles that are intended to be used to run the pipeline with test data (see the [nf-core pipeline testing tutorial](https://nf-co.re/docs/contributing/tutorials/creating_with_nf_core#testing-the-new-pipeline) for details). To do this, we can run the below command:
 
 **Command**
+
 ```bash
 nextflow run . -profile docker,test --outdir results
 ```
 
 **Output**
+
 ```
 executor >  local (15)
 [7f/08ba89] process > NFCORE_ASSEMBLYEXAMPLE:ASSEMBLYEXAMPLE:INPUT_CHECK:SAMPLESHEET_CHECK (samplesheet_test_illumina_amplicon.csv) [100%] 1 of 1 ✔
@@ -202,11 +206,13 @@ There are two types of testing profiles: (1) [test](https://github.com/apetkau/n
 Let's try to run `test_full`.
 
 **Command**
+
 ```bash
 nextflow run . -profile docker,test_full --outdir results
 ```
 
 **Output**
+
 ```
 [11/56325e] process > NFCORE_ASSEMBLYEXAMPLE:ASSEMBLYEXAMPLE:INPUT_CHECK:SAMPLESHEET_CHECK (samplesheet_full_illumina_amplicon.csv) [100%] 1 of 1 ✔
 [b5/a1ea7d] process > NFCORE_ASSEMBLYEXAMPLE:ASSEMBLYEXAMPLE:FASTQC (sample2_T1)                                                    [100%] 2 of 2 ✔
@@ -227,3 +233,44 @@ This succeeded as well, but was on larger files (compare running time of ~2 min 
 Since both the `test` and `test_full` profiles succeded with the defaults provided by nf-core, the only changes needed are to remove the **TODO** statements in the respective files: [test](https://github.com/apetkau/nf-core-assemblyexample/blob/step4/conf/test.config#L23-L24) and [test_full](https://github.com/apetkau/nf-core-assemblyexample/blob/step4/conf/test_full.config#L18-L19).
 
 To view a summary of changes, please see <https://github.com/apetkau/nf-core-assemblyexample/compare/step4...step5> (you can ignore changes in `README.md`).
+
+# Step 6: CI with GitHub Actions
+
+On GitHub Actions CI tests for the current code, there is one faillure for the `nf-core linting / Prettier` check, mainly:
+
+```
+Run prettier --check ${GITHUB_WORKSPACE}
+Checking formatting...
+[warn] modules.json
+[warn] README.md
+[warn] Code style issues found in 2 files. Run Prettier to fix.
+Error: Process completed with exit code 1.
+```
+
+The command [prettier](https://prettier.io/) is used to check for consistent formatting of code, and is described in the [nf-core code formatting](https://nf-co.re/docs/contributing/code_formatting) documentation.
+
+The above error messages indicate some files are failing the `prettier` check. To run `prettier` manually to reproduce the CI test issues, we can use the following commands:
+
+**Command**
+
+```bash
+conda install prettier
+prettier --check .
+```
+
+**Output**
+
+```
+Checking formatting...
+[warn] modules.json
+[warn] README.md
+[warn] Code style issues found in 2 files. Run Prettier to fix.
+```
+
+To make the necessary changes, the following can be run:
+
+```bash
+prettier -w .
+```
+
+Now, you can commit any of the changed files and re-push to try the CI tests again.
