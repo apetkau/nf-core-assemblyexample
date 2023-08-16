@@ -333,4 +333,18 @@ Finally, the necessary changes have been made. You can push to the branch `step/
 
 The passing tests and code changes can all be reviewed in the [step 6 pull-request](https://github.com/apetkau/nf-core-assemblyexample/pull/3). You can also review the code changes needed at <https://github.com/apetkau/nf-core-assemblyexample/compare/step5...step6>.
 
+# Step 7: Updating modules
+
+[nf-core distributed modules](https://nf-co.re/tools#modules) may need to be updated over time with the latest versions. This can be done with the command:
+
+```bash
+nf-core modules update
+```
+
+This command will ask a number of questions on how you wish to proceed with updating and will then update modules in `modules/nf-core/`.
+
+Once everything is finished you can do `git diff` to view the differences. If you are happy, you can commit and create a PR (which should run the tests).
+
+You can review the code changes performed at <https://github.com/apetkau/nf-core-assemblyexample/compare/step6...step7>.
+
 [nf-core-ci-tests-pass.png]: docs/images/nf-core-ci-tests-pass.png
