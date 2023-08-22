@@ -347,4 +347,28 @@ Once everything is finished you can do `git diff` to view the differences. If yo
 
 You can review the code changes performed at <https://github.com/apetkau/nf-core-assemblyexample/compare/step6...step7>.
 
+# Step 8: Parse samplesheet using nf-validation fromSamplesheet()
+
+By default, the nf-core template includes a [subworkflow for parsing the `--input` samplesheet](https://github.com/apetkau/nf-core-assemblyexample/blob/step7/subworkflows/local/input_check.nf) listing samples/sequence data and producing channels containing this data.
+
+The Nextflow nf-validation plugin also includes a function for validating an input samplesheet and [converting listed samples to Nextflow channels](https://nextflow-io.github.io/nf-validation/samplesheets/fromSamplesheet/). This includes a way to define the expected structure of a samplesheet using a JSON schema (the [assets/schema_input.json](https://github.com/apetkau/nf-core-assemblyexample/blob/step7/assets/schema_input.json) file). If your pipeline requires changing the structure of the samplesheet (to add more types of data for example), then it may be useful to switch to the nf-validation plugin's `fromSamplesheet()` version of creating Nextflow channels from samplesheets.
+
+We will make the switch to fromSamplesheet in this example. More detailed instructions are found in the [nf-validation](https://nextflow-io.github.io/nf-validation/samplesheets/fromSamplesheet/) documentation.
+
+## 8.1. Add reference to `assets/schema_input.json` file in `nextflow_schema.json`
+
+The [nextflow_schema.json](https://github.com/apetkau/nf-core-assemblyexample/blob/step7/nextflow_schema.json) is a JSON schema that provides a description of all parameters of your pipeline and enables validation of parameters/parameter types. The [schema_input.json](https://github.com/apetkau/nf-core-assemblyexample/blob/step7/assets/schema_input.json) file defines the structure of the input samplesheet.csv, but by default nf-core pipelines don't use this file. To make the switch to the nf-validation `fromSamplesheet` function, we must reference the `assets/schema_input.json` file in the `nextflow_schema.json` file. To do this, please add the following to the `nextflow_schema.json` file under the `definitions.input_output_options.properties.input` section:
+
+```
+"properties": {
+    "input": {
+    ...
+    "schema": "assets/schema_input.json",
+    ...
+    }
+}
+```
+
+## 8.2. Add 
+
 [nf-core-ci-tests-pass.png]: docs/images/nf-core-ci-tests-pass.png

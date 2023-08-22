@@ -4,7 +4,7 @@
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 */
 
-include { paramsSummaryLog; paramsSummaryMap } from 'plugin/nf-validation'
+include { paramsSummaryLog; paramsSummaryMap; fromSamplesheet } from 'plugin/nf-validation'
 
 def logo = NfcoreTemplate.logo(workflow, params.monochrome_logs)
 def citation = '\n' + WorkflowMain.citation(workflow) + '\n'
@@ -76,18 +76,19 @@ workflow ASSEMBLYEXAMPLE {
     // TODO: OPTIONAL, you can use nf-validation plugin to create an input channel from the samplesheet with Channel.fromSamplesheet("input")
     // See the documentation https://nextflow-io.github.io/nf-validation/samplesheets/fromSamplesheet/
     // ! There is currently no tooling to help you write a sample sheet schema
-
+    ch_input = Channel.fromSamplesheet("input")
+               .map {meta, fastq_1, fastq_2 -> tuple(meta, [ fastq_1, fastq_2 ])}
     //
     // MODULE: Run FastQC
     //
     FASTQC (
-        INPUT_CHECK.out.reads
+        ch_input
     )
     ch_versions = ch_versions.mix(FASTQC.out.versions.first())
 
     // Adding assembly workflow steps here
     FASTP (
-        INPUT_CHECK.out.reads,
+        ch_input,
         adapter_fasta=[],
         save_trimmed_fail=false,
         save_merged=false
