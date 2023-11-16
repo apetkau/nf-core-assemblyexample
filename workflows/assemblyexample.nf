@@ -101,8 +101,6 @@ workflow ASSEMBLYEXAMPLE {
         consensus=MEGAHIT.out.contigs,
         fasta=Channel.empty(),
         gff=Channel.empty(),
-        use_fasta=false,
-        use_gff=false
     )
 
     CUSTOM_DUMPSOFTWAREVERSIONS (
