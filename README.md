@@ -439,5 +439,7 @@ Once you've updated, please make sure to test any of the code changes, make any 
 nextflow run . -profile docker,test --outdir results
 ```
 
+You can review the code changes performed at <https://github.com/apetkau/nf-core-assemblyexample/compare/step7...step8>.
+
 [nf-core-ci-tests-pass.png]: docs/images/nf-core-ci-tests-pass.png
 [nf-core sync documentation]: https://nf-co.re/tools#sync-a-pipeline-with-the-template
