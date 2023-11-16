@@ -392,6 +392,7 @@ git status
 ```
 
 **Output**
+
 ```
 Unmerged paths:
   (use "git add <file>..." to mark resolution)
@@ -437,7 +438,6 @@ Once you've updated, please make sure to test any of the code changes, make any 
 ```bash
 nextflow run . -profile docker,test --outdir results
 ```
-
 
 [nf-core-ci-tests-pass.png]: docs/images/nf-core-ci-tests-pass.png
 [nf-core sync documentation]: https://nf-co.re/tools#sync-a-pipeline-with-the-template
