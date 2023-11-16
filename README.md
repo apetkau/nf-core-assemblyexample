@@ -347,4 +347,97 @@ Once everything is finished you can do `git diff` to view the differences. If yo
 
 You can review the code changes performed at <https://github.com/apetkau/nf-core-assemblyexample/compare/step6...step7>.
 
+# Step 8: nf-core sync
+
+On updates of the nf-core software, you may need to resynchronize the code with nf-core, in particular resynchronize and merge in the `TEMPLATE` branch. This is described in more detail at <https://nf-co.re/docs/contributing/sync>. This step goes through the process of synchronizing with nf-core between versions 2.9 and 2.10.
+
+## 8.1. Check and update nf-core software
+
+To see what the latest version of the `nf-core` tools are, you can look through the GitHub repo at <https://github.com/nf-core/tools>. The latest version (at the time of writing) is 2.10. You can check what version of your nf-core tools is by running:
+
+```bash
+nf-core --version
+```
+
+If your version is the latest, then there should be no need to sync with nf-core, so you can skip **Step 8**. However, if your version is behind, then you may need to synchronize with nf-core.
+
+If it is needed, to update to the latest version of nf-core you can run (assuming nf-core was installed via conda):
+
+```bash
+conda update nf-core
+```
+
+## 8.2. nf-core sync
+
+Once nf-core is updated, to synchronize you can run:
+
+```bash
+nf-core sync
+```
+
+This should update the `TEMPLATE` branch on your git repository to the latest version. Please see the [nf-core sync documentation][] for more details.
+
+## 8.3. Merge `TEMPLATE` branch
+
+Once you have synchronized, you can use the following command to merge the TEMPLATE branch into your current code.
+
+```bash
+git merge TEMPLATE
+```
+
+This may lead to merge conflicts, which you will have to fix manually. You can see which files need fixing in the case of merge conflicts by running:
+
+```bash
+git status
+```
+
+**Output**
+```
+Unmerged paths:
+  (use "git add <file>..." to mark resolution)
+        both modified:   README.md
+        both modified:   modules.json
+        both modified:   modules/nf-core/custom/dumpsoftwareversions/main.nf
+        both modified:   modules/nf-core/fastqc/main.nf
+        both modified:   modules/nf-core/multiqc/main.nf
+```
+
+In this case, I want to keep my own copy of `README.md` without merging. To do this, you can use the following command:
+
+```bash
+git checkout --ours README.md
+git add README.md
+```
+
+Here, `--ours` means the version of `README.md` prior to merging TEMPLATE (you can use `--theirs` to keep the version found in the TEMPLATE branch).
+
+I am also going to keep my own copies of all the nf-core modules since I will update them afterwards. To keep all files, you can run:
+
+```bash
+git checkout --ours .
+git add README.md modules.json modules/nf-core/custom/dumpsoftwareversions/main.nf modules/nf-core/fastqc/main.nf modules/nf-core/multiqc/main.nf
+```
+
+Next, to finish the merge of TEMPLATE, you will have to make a commit. Please review the output of `git status` first to make sure you are commiting the correct files.
+
+```bash
+git commit -m "Merged TEMPLATE"
+```
+
+## 8.4. (Optional) update modules
+
+For this example code, I will also update modules (as described in [Step 7: Updating modules](#step7-updating-modules).
+
+```bash
+nf-core modules update
+```
+
+Once you've updated, please make sure to test any of the code changes, make any fixes, and commit.
+
+```bash
+nextflow run . -profile docker,test --outdir results
+```
+
+
 [nf-core-ci-tests-pass.png]: docs/images/nf-core-ci-tests-pass.png
+[nf-core sync documentation]: https://nf-co.re/tools#sync-a-pipeline-with-the-template
